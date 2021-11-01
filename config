@@ -1,0 +1,9 @@
+export SERVICE_SPUG_NAME=spug
+
+export SERVICE_SPUG_DATA=$(service::get_data_path $PLUGIN_SPUG_NAME)
+export SERVICE_SPUG_LOGS=$(service::get_logs_path $PLUGIN_SPUG_NAME)
+export SERVICE_SPUG_CONFIGS=$(service::get_configs_path $PLUGIN_SPUG_NAME)/config
+
+export SERVICE_SPUG_VERSION=v2.3.17
+export SERVICE_SPUG_PORT=8482
+# export SPUG_SECRET_KEY=
