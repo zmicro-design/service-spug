@@ -21,6 +21,9 @@ check() {
 
   # @TODO config should export global in function
   export SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY
+
+  # @TODO call manually
+  service::run_check_ok
 }
 
 check $@
