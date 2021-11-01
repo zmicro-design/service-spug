@@ -1,3 +1,3 @@
-NAME=Spug
-VERSION=v0.0.3
+NAME=spug
+VERSION=v0.0.4
 DESCRIPTION="Spug Service"

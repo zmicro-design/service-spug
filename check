@@ -1,0 +1,26 @@
+#!/bin/bash
+
+load inquirer
+
+check() {
+  load inquirer
+
+  if [ ! -f $SERVICE_SPUG_CONFIG ]; then
+    touch $SERVICE_SPUG_CONFIG
+  fi
+
+  config::load_file $SERVICE_SPUG_CONFIG
+
+  if [ -z "$SERVICE_SPUG_SECRET_KEY" ]; then
+    inquirer::text "请输入 SECRET KEY:" secret_key "$(curl https://httpbin.zcorky.com/uuid 2>/dev/null | awk -F '"' '{print $4}')"
+
+    export SERVICE_SPUG_SECRET_KEY=$secret_key
+
+    echo "SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY" >$SERVICE_SPUG_CONFIG
+  fi
+
+  # @TODO config should export global in function
+  export SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY
+}
+
+check $@
