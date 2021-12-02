@@ -12,7 +12,7 @@ check() {
   config::load_file $SERVICE_SPUG_CONFIG
 
   if [ -z "$SERVICE_SPUG_SECRET_KEY" ]; then
-    inquirer::text "请输入 SECRET KEY:" secret_key "$(curl https://httpbin.zcorky.com/uuid 2>/dev/null | awk -F '"' '{print $4}')"
+    inquirer::text "请输入 SECRET KEY:" secret_key "$(os::uuid)"
 
     export SERVICE_SPUG_SECRET_KEY=$secret_key
 
