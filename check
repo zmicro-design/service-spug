@@ -22,8 +22,12 @@ check() {
   # @TODO config should export global in function
   export SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY
 
+  if [ ! -f "$SERVICE_DATA/db.sqlite3" ]; then
+    cp $SERVICE_DIR/data/db.sqlite3 $SERVICE_DATA/db.sqlite3
+  fi
+
   # @TODO call manually
-  service::run_check_ok
+  # service::run_check_ok
 }
 
 check $@

@@ -12,7 +12,7 @@ services:
       REDIS_PORT: 6379
       REDIS_PASSWORD: e7b60e02-93c1-4a5d-b244-3917d1e943be
     volumes:
-      - ./data/db.sqlite3:/spug/spug_api/db.sqlite3
+      - ${SERVICE_DATA}/db.sqlite3:/spug/spug_api/db.sqlite3
     depends_on:
       - spug_redis
 
@@ -20,7 +20,7 @@ services:
     image: redis:5-alpine
     command: redis-server --requirepass e7b60e02-93c1-4a5d-b244-3917d1e943be
     volumes:
-      - ./data/redis:/data
+      - ${SERVICE_DATA}/redis:/data
 
 networks:
   default:
