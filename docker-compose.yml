@@ -34,6 +34,8 @@ services:
       #
       REDIS_HOST: spug_redis
       REDIS_PASSWORD: ${SECRET_KEY}
+      #
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
     volumes:
       - ${SERVICE_DATA}/backend:/data
 
