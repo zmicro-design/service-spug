@@ -15,7 +15,9 @@ services:
       REDIRECT_URI: ${REDIRECT_URI}
       #
       FRONTEND: http://spug_frontend:8080
-      BACKEND: http://spug_backend:8080
+      BACKEND: http://spug.backend:8080
+    links:
+      - spug_backend:spug.backend
 
   spug_frontend:
     image: whatwewant/spug-frontend:${SERVICE_SPUG_VERSION}
