@@ -1,33 +1,20 @@
 #!/bin/bash
 
-load inquirer
+service::config_set() {
+  config::check_or_set $1 $2 $SERVICE_CONFIG "${@:3}"
+}
 
 check() {
-  load inquirer
-
-  if [ ! -f $SERVICE_SPUG_CONFIG ]; then
-    touch $SERVICE_SPUG_CONFIG
+  if [ "$DEBUG" = "true" ]; then
+    log::info "[DEBUG][service]: $SERVICE_CONFIG"
+    cat $SERVICE_CONFIG
   fi
 
-  config::load_file $SERVICE_SPUG_CONFIG
-
-  if [ -z "$SERVICE_SPUG_SECRET_KEY" ]; then
-    inquirer::text "请输入 SECRET KEY:" secret_key "$(os::uuid)"
-
-    export SERVICE_SPUG_SECRET_KEY=$secret_key
-
-    echo "SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY" >$SERVICE_SPUG_CONFIG
-  fi
-
-  # @TODO config should export global in function
-  export SERVICE_SPUG_SECRET_KEY=$SERVICE_SPUG_SECRET_KEY
-
-  if [ ! -f "$SERVICE_DATA/db.sqlite3" ]; then
-    cp $SERVICE_DIR/data/db.sqlite3 $SERVICE_DATA/db.sqlite3
-  fi
-
-  # @TODO call manually
-  # service::run_check_ok
+  service::config_set SECRET_KEY text "SECRET_KEY" $(os::random_string 8)
+  service::config_set CLIENT_ID text "CLIENT_ID"
+  service::config_set CLIENT_SECRET text "CLIENT_SECRET"
+  service::config_set REDIRECT_URI text "REDIRECT_URI"
+  service::config_set ADMIN_USERNAME text "ADMIN_USERNAME"
 }
 
 check $@
