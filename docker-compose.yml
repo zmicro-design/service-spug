@@ -14,8 +14,8 @@ services:
       CLIENT_SECRET: ${CLIENT_SECRET}
       REDIRECT_URI: ${REDIRECT_URI}
       #
-      FRONTEND: http://frontend:8080
-      BACKEND: http://backend:8080
+      FRONTEND: http://spug_frontend:8080
+      BACKEND: http://spug_backend:8080
 
   spug_frontend:
     image: whatwewant/spug-frontend:${SERVICE_SPUG_VERSION}
