@@ -18,11 +18,15 @@ services:
       BACKEND: http://spug.backend:8080
     links:
       - spug_backend:spug.backend
+    mem_limit: 4096m
+    cpus: 2
 
   spug_frontend:
     image: whatwewant/spug-frontend:${SERVICE_SPUG_VERSION}
     restart: always
     platform: linux/amd64
+    mem_limit: 4096m
+    cpus: 2
   
   spug_backend:
     image: whatwewant/spug-backend:${SERVICE_SPUG_VERSION}
@@ -38,12 +42,16 @@ services:
       ADMIN_USERNAME: ${ADMIN_USERNAME}
     volumes:
       - ${SERVICE_DATA}/backend:/data
+    mem_limit: 4096m
+    cpus: 2
 
   spug_redis:
     image: redis:5-alpine
     command: redis-server --requirepass ${SECRET_KEY}
     volumes:
       - ${SERVICE_DATA}/redis:/data
+    mem_limit: 4096m
+    cpus: 2
 
 networks:
   default:
